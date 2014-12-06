@@ -6,6 +6,7 @@ import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyEvent;
+import javafx.scene.input.MouseButton;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
@@ -48,9 +49,10 @@ public class Main extends Application {
                     map.selectStart(x, y);
                 } else if (event.isShiftDown()) {
                     map.selectEnd(x, y);
-                } else if (event.isAltDown()) {
-                    map.selectBlock(x, y);
                 } else {
+                    map.selectBlock(x, y);
+                }
+                if (event.getButton().equals(MouseButton.SECONDARY)) {
                     map.selectEmpty(x, y);
                 }
                 map.findPath();
