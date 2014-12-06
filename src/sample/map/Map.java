@@ -189,7 +189,7 @@ public class Map {
         Cell parent = nearCell.getParent();
         double g = parent.getG() + Const.STEP_PRICE;
         nearCell.setG(g);
-        double h = (Math.abs(endCell.getX() - nearCell.getX()) + Math.abs(endCell.getY() - nearCell.getY())) * Const.STEP_PRICE;
+        double h = (Math.abs(endCell.getX() - nearCell.getX()) + Math.abs(endCell.getY() - nearCell.getY())) * Const.STEP_PRICE * 2;
         nearCell.setH(h);
         nearCell.setF(g + h);
     }
