@@ -61,4 +61,8 @@ public class Map {
             }
         }
     }
+
+    public void reInit() {
+        initMap();
+    }
 }

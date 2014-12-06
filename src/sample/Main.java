@@ -51,7 +51,12 @@ public class Main extends Application {
         scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
             @Override
             public void handle(KeyEvent event) {
-
+                switch (event.getCode()) {
+                    case R:
+                        map.reInit();
+                        map.draw();
+                        break;
+                }
             }
         });
     }
