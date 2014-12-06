@@ -140,4 +140,15 @@ public class Cell {
     public int getY() {
         return y;
     }
+
+    @Override
+    public String toString() {
+        return "Cell{" +
+                "f=" + f +
+                ", g=" + g +
+                ", h=" + h +
+                ", x=" + x +
+                ", y=" + y +
+                '}';
+    }
 }

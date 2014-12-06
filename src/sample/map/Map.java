@@ -127,6 +127,13 @@ public class Map {
     }
 
     public void findPath() {
+        for (Cell[] row : cells) {
+            for (Cell cell : row) {
+                cell.setG(0);
+                cell.setH(0);
+                cell.setF(0);
+            }
+        }
         startCell = findCellByType(Cell.CellType.START);
         endCell = findCellByType(Cell.CellType.END);
         if (startCell == null || endCell == null) {
@@ -158,7 +165,7 @@ public class Map {
                 if (!openList.contains(nearCell)) {
                     openList.add(nearCell);
                     nearCell.setParent(currentCell);
-                    setupFGH(nearCell, startCell, endCell);
+                    setupFGH(nearCell);
                 } else {
                     double oldG = nearCell.getG();
                     double newG = currentCell.getG() + Const.STEP_PRICE;
@@ -175,11 +182,11 @@ public class Map {
         }
     }
 
-    private void setupFGH(Cell nearCell, Cell startCell, Cell endCell) {
+    private void setupFGH(Cell nearCell) {
         Cell parent = nearCell.getParent();
         double g = parent.getG() + Const.STEP_PRICE;
         nearCell.setG(g);
-        double h = Math.abs(endCell.getX() - nearCell.getX()) + Math.abs(endCell.getY() - nearCell.getY());
+        double h = (Math.abs(endCell.getX() - nearCell.getX()) + Math.abs(endCell.getY() - nearCell.getY())) * Const.STEP_PRICE;
         nearCell.setH(h);
         nearCell.setF(g + h);
     }
