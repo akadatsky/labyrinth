@@ -96,7 +96,6 @@ public class Map {
                 }
             }
         }
-        System.out.println("x=" + x + ", y=" + y);
         return null;
     }
 
