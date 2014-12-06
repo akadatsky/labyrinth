@@ -1,6 +1,7 @@
 package sample.map;
 
 import javafx.scene.canvas.GraphicsContext;
+import javafx.stage.Stage;
 import sample.Const;
 
 import java.util.ArrayList;
@@ -12,6 +13,7 @@ public class Map {
 
     private Cell[][] cells = new Cell[Const.ROW_SIZE][Const.ROW_COUNT];
     private GraphicsContext gc;
+    private Stage primaryStage;
 
     private List<Cell> openList = new ArrayList<Cell>();
     private List<Cell> closedList = new ArrayList<Cell>();
@@ -20,8 +22,9 @@ public class Map {
 
     private boolean showTestedCells = false;
 
-    public Map(GraphicsContext gc) {
+    public Map(GraphicsContext gc, Stage primaryStage) {
         this.gc = gc;
+        this.primaryStage = primaryStage;
         initMap();
     }
 
@@ -196,10 +199,13 @@ public class Map {
             showTestedCells();
         }
         Cell currentCell = endCell;
+        int pathCount = 0;
         while (currentCell.getParent() != null) {
+            pathCount++;
             currentCell = currentCell.getParent();
             if (currentCell == startCell) {
                 currentCell.setType(Cell.CellType.START);
+                primaryStage.setTitle("Path length: " + pathCount);
                 return;
             }
             currentCell.setType(Cell.CellType.PATH);

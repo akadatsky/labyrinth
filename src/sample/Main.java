@@ -16,6 +16,7 @@ public class Main extends Application {
 
     private Map map;
     private GraphicsContext gc;
+    private Stage primaryStage;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -23,6 +24,8 @@ public class Main extends Application {
         BorderPane group = new BorderPane();
         group.setCenter(canvas);
         Scene scene = new Scene(group);
+
+        this.primaryStage = primaryStage;
         primaryStage.setScene(scene);
         primaryStage.setTitle("Labyrinth");
         primaryStage.show();
@@ -35,7 +38,7 @@ public class Main extends Application {
     }
 
     private void initMap() {
-        map = new Map(gc);
+        map = new Map(gc, primaryStage);
         map.draw();
     }
 
