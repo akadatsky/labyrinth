@@ -42,7 +42,19 @@ public class Main extends Application {
         scene.setOnMouseClicked(new EventHandler<MouseEvent>() {
             @Override
             public void handle(MouseEvent event) {
-
+                int x = (int) event.getSceneX();
+                int y = (int) event.getSceneY();
+                if (event.isControlDown()) {
+                    map.selectStart(x, y);
+                } else if (event.isShiftDown()) {
+                    map.selectEnd(x, y);
+                } else if (event.isAltDown()) {
+                    map.selectBlock(x, y);
+                } else {
+                    map.selectEmpty(x, y);
+                }
+                map.findPath();
+                map.draw();
             }
         });
     }

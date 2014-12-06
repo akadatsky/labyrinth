@@ -65,4 +65,52 @@ public class Map {
     public void reInit() {
         initMap();
     }
+
+    public void selectStart(int x, int y) {
+        replaceType(Cell.CellType.START, Cell.CellType.EMPTY);
+        Cell cell = getCell(x, y);
+        cell.setType(Cell.CellType.START);
+    }
+
+    public void selectEnd(int x, int y) {
+        replaceType(Cell.CellType.END, Cell.CellType.EMPTY);
+        Cell cell = getCell(x, y);
+        cell.setType(Cell.CellType.END);
+    }
+
+    public void selectEmpty(int x, int y) {
+        Cell cell = getCell(x, y);
+        cell.setType(Cell.CellType.EMPTY);
+    }
+
+    public void selectBlock(int x, int y) {
+        Cell cell = getCell(x, y);
+        cell.setType(Cell.CellType.BLOCK);
+    }
+
+    private Cell getCell(int x, int y) {
+        for (Cell[] row : cells) {
+            for (Cell cell : row) {
+                if (cell.isMyPoint(x, y)) {
+                    return cell;
+                }
+            }
+        }
+        System.out.println("x=" + x + ", y=" + y);
+        return null;
+    }
+
+    private void replaceType(Cell.CellType from,  Cell.CellType to) {
+        for (Cell[] row : cells) {
+            for (Cell cell : row) {
+                if (cell.getType() == from){
+                    cell.setType(to);
+                }
+            }
+        }
+    }
+
+    public void findPath() {
+    }
+
 }
