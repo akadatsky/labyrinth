@@ -10,7 +10,7 @@ import java.util.List;
 
 public class Map {
 
-    private Cell[][] cells = new Cell[Const.ROW_COUNT][Const.ROW_SIZE];
+    private Cell[][] cells = new Cell[Const.ROW_SIZE][Const.ROW_COUNT];
     private GraphicsContext gc;
 
     private List<Cell> openList = new ArrayList<Cell>();
