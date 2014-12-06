@@ -27,6 +27,15 @@ public class Cell {
 
     private Cell parent;
 
+    // price sum
+    private double f;
+
+    // price from start
+    private double g;
+
+    // price to finish
+    private double h;
+
     public Cell(GraphicsContext gc, int x, int y) {
         this.x = x;
         this.y = y;
@@ -67,7 +76,7 @@ public class Cell {
                 gc.setFill(Color.BLUE);
                 break;
             case PATH:
-                gc.setFill(Color.GREEN);
+                gc.setFill(Color.DARKGREEN);
                 break;
             case OPENED:
                 gc.setFill(Color.YELLOW);
@@ -89,5 +98,46 @@ public class Cell {
 
     public CellType getType() {
         return type;
+    }
+
+
+    public double getF() {
+        return f;
+    }
+
+    public void setF(double f) {
+        this.f = f;
+    }
+
+    public double getG() {
+        return g;
+    }
+
+    public void setG(double g) {
+        this.g = g;
+    }
+
+    public double getH() {
+        return h;
+    }
+
+    public void setH(double h) {
+        this.h = h;
+    }
+
+    public Cell getParent() {
+        return parent;
+    }
+
+    public void setParent(Cell parent) {
+        this.parent = parent;
+    }
+
+    public int getX() {
+        return x;
+    }
+
+    public int getY() {
+        return y;
     }
 }
