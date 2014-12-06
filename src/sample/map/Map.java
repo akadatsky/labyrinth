@@ -92,11 +92,15 @@ public class Map {
     }
 
     public void selectEmpty(int x, int y) {
+        replaceType(Cell.CellType.PATH, Cell.CellType.EMPTY);
+        replaceType(Cell.CellType.OPENED, Cell.CellType.EMPTY);
         Cell cell = getCell(x, y);
         cell.setType(Cell.CellType.EMPTY);
     }
 
     public void selectBlock(int x, int y) {
+        replaceType(Cell.CellType.PATH, Cell.CellType.EMPTY);
+        replaceType(Cell.CellType.OPENED, Cell.CellType.EMPTY);
         Cell cell = getCell(x, y);
         cell.setType(Cell.CellType.BLOCK);
     }
