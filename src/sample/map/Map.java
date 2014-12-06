@@ -1,5 +1,6 @@
 package sample.map;
 
+import javafx.scene.canvas.GraphicsContext;
 import sample.Const;
 
 import java.util.ArrayList;
@@ -8,8 +9,10 @@ import java.util.List;
 public class Map {
 
     private Cell[][] cells = new Cell[Const.ROW_COUNT][Const.ROW_SIZE];
+    private GraphicsContext gc;
 
-    public Map() {
+    public Map(GraphicsContext gc) {
+        this.gc = gc;
         initMap();
     }
 
@@ -17,7 +20,7 @@ public class Map {
 
         for (int i = 0; i < cells.length; i++) {
             for (int j = 0; j < cells[i].length; j++) {
-                cells[i][j] = new Cell(i, j);
+                cells[i][j] = new Cell(gc, i, j);
             }
         }
 
@@ -50,4 +53,12 @@ public class Map {
         return result;
     }
 
+    public void draw() {
+        gc.clearRect(0, 0, gc.getCanvas().getWidth(), gc.getCanvas().getHeight());
+        for (Cell[] row : cells) {
+            for (Cell cell : row) {
+                cell.draw();
+            }
+        }
+    }
 }

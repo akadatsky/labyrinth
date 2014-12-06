@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.BorderPane;
@@ -13,6 +14,7 @@ import sample.map.Map;
 public class Main extends Application {
 
     private Map map;
+    private GraphicsContext gc;
 
     @Override
     public void start(Stage primaryStage) throws Exception {
@@ -27,11 +29,13 @@ public class Main extends Application {
         setKeyPressListener(scene);
         setMouseClickListener(scene);
 
+        gc = canvas.getGraphicsContext2D();
         initMap();
     }
 
     private void initMap() {
-        map = new Map();
+        map = new Map(gc);
+        map.draw();
     }
 
     private void setMouseClickListener(Scene scene) {
