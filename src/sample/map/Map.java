@@ -100,10 +100,10 @@ public class Map {
         return null;
     }
 
-    private void replaceType(Cell.CellType from,  Cell.CellType to) {
+    private void replaceType(Cell.CellType from, Cell.CellType to) {
         for (Cell[] row : cells) {
             for (Cell cell : row) {
-                if (cell.getType() == from){
+                if (cell.getType() == from) {
                     cell.setType(to);
                 }
             }
@@ -111,6 +111,23 @@ public class Map {
     }
 
     public void findPath() {
+        Cell startCell = findCellByType(Cell.CellType.START);
+        Cell endCell = findCellByType(Cell.CellType.END);
+        if (startCell == null || endCell == null) {
+            return;
+        }
+
+    }
+
+    private Cell findCellByType(Cell.CellType type) {
+        for (Cell[] row : cells) {
+            for (Cell cell : row) {
+                if (cell.getType() == type) {
+                    return cell;
+                }
+            }
+        }
+        return null;
     }
 
 }
