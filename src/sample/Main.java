@@ -68,6 +68,10 @@ public class Main extends Application {
                         map.reInit();
                         map.draw();
                         break;
+                    case SPACE:
+                        map.changeViewMode();
+                        map.draw();
+                        break;
                 }
             }
         });

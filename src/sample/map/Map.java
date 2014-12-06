@@ -15,6 +15,10 @@ public class Map {
 
     private List<Cell> openList = new ArrayList<Cell>();
     private List<Cell> closedList = new ArrayList<Cell>();
+    private Cell startCell;
+    private Cell endCell;
+
+    private boolean showTestedCells = false;
 
     public Map(GraphicsContext gc) {
         this.gc = gc;
@@ -119,8 +123,8 @@ public class Map {
     }
 
     public void findPath() {
-        Cell startCell = findCellByType(Cell.CellType.START);
-        Cell endCell = findCellByType(Cell.CellType.END);
+        startCell = findCellByType(Cell.CellType.START);
+        endCell = findCellByType(Cell.CellType.END);
         if (startCell == null || endCell == null) {
             return;
         }
@@ -128,7 +132,7 @@ public class Map {
         closedList.clear();
         openList.add(startCell);
         startCell.setG(0);
-        while (true) {
+        while (!openList.isEmpty()) {
             Cell currentCell = getCellWithMinF();
             if (currentCell == null) {
                 // no path
@@ -137,7 +141,7 @@ public class Map {
             if (currentCell.getNeighbors().contains(endCell)) {
                 // path founded
                 endCell.setParent(currentCell);
-                drawPath(endCell, startCell);
+                drawPath(showTestedCells);
                 return;
             }
             for (Cell nearCell : currentCell.getNeighbors()) {
@@ -176,14 +180,24 @@ public class Map {
         nearCell.setF(g + h);
     }
 
-    private void drawPath(Cell endCell, Cell startCell) {
+    private void drawPath(boolean showTested) {
+        if (showTested) {
+            showTestedCells();
+        }
         Cell currentCell = endCell;
-        while (true) {
+        while (currentCell.getParent() != null) {
             currentCell = currentCell.getParent();
-            if (currentCell == startCell){
-                break;
+            if (currentCell == startCell) {
+                currentCell.setType(Cell.CellType.START);
+                return;
             }
             currentCell.setType(Cell.CellType.PATH);
+        }
+    }
+
+    private void showTestedCells() {
+        for (Cell cell : closedList) {
+            cell.setType(Cell.CellType.OPENED);
         }
     }
 
@@ -214,5 +228,12 @@ public class Map {
                 return Double.compare(c1.getF(), c2.getF());
             }
         });
+    }
+
+    public void changeViewMode() {
+        replaceType(Cell.CellType.OPENED, Cell.CellType.EMPTY);
+        startCell.setType(Cell.CellType.START);
+        showTestedCells = !showTestedCells;
+        drawPath(showTestedCells);
     }
 }
