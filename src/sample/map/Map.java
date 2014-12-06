@@ -171,7 +171,7 @@ public class Map {
                     setupFGH(nearCell);
                 } else {
                     double oldG = nearCell.getG();
-                    double newG = currentCell.getG() + Const.STEP_PRICE;
+                    double newG = currentCell.getG() + Const.G_STEP_PRICE;
                     if (newG < oldG) {
                         nearCell.setParent(currentCell);
                         nearCell.setG(newG);
@@ -187,9 +187,9 @@ public class Map {
 
     private void setupFGH(Cell nearCell) {
         Cell parent = nearCell.getParent();
-        double g = parent.getG() + Const.STEP_PRICE;
+        double g = parent.getG() + Const.G_STEP_PRICE;
         nearCell.setG(g);
-        double h = (Math.abs(endCell.getX() - nearCell.getX()) + Math.abs(endCell.getY() - nearCell.getY())) * Const.STEP_PRICE * 2;
+        double h = (Math.abs(endCell.getX() - nearCell.getX()) + Math.abs(endCell.getY() - nearCell.getY())) * Const.H_STEP_PRICE;
         nearCell.setH(h);
         nearCell.setF(g + h);
     }

@@ -10,8 +10,9 @@ public class Const {
     public static final int WIDTH = ROW_SIZE * SELL_SIZE;
     public static final int HEIGHT = ROW_COUNT * SELL_SIZE;
 
-    public static final double FREE_PERCENT = 80.0;
+    public static final double FREE_PERCENT = 60.0;
 
-    public static final double STEP_PRICE = 10.0;
+    public static final double G_STEP_PRICE = 1.0;
+    public static final double H_STEP_PRICE = 1.2;
 
 }
